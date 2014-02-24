@@ -12,19 +12,102 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css styles/vendor.css -->
     <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/sass-bootstrap/dist/css/bootstrap.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,app}) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="resumeApp">
+  <body ng-app="resumeApp" ng-cloak="">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container" ng-view=""></div>
+    <div class="background" res-pages="">
+        <div class="overlay" res-page=""
+            res-page-background="images/image-bean.jpg">
+            <h1>Software Development Manager, Algorithmic Trading &amp; Smart Execution</h1>
+            <p>January 2012 - Present, TradeLink (2 years 2 months)</p>
+            <p>
+                I lead six developers, providing project management in addition
+                to technical direction.
+            </p>
+        </div>
+        <div class="overlay" res-page=""
+            res-page-background="images/image-polar.jpg">
+            <h1>Software Development Manager, Algorithmic Trading &amp; Smart Execution</h1>
+            <p>January 2012 - Present, TradeLink (2 years 2 months)</p>
+            <p>
+                Our group is responsible for the software platform used for
+                implementing trading strategies and execution algorithms, and in
+                large part for their implementations and to a lesser degree for
+                their analysis.
+            </p>
+        </div>
+        <div class="overlay" res-page=""
+            res-page-background="images/image-bridges.jpg">
+            <h1>Software Development Manager, Algorithmic Trading &amp; Smart Execution</h1>
+            <p>January 2012 - Present, TradeLink (2 years 2 months)</p>
+            <p>
+                Our group is responsible for developing and maintaining the
+                software platform used for implementing trading strategies and
+                execution algorithms. We are also responsible in large part for
+                the implementations and to a lesser degree for the analysis of
+                those strategies and algorithms.
+            </p>
+        </div>
+        <div class="overlay" res-page=""
+            res-page-background="images/image-sox.jpg">
+            <h1>Software Developer</h1>
+            <p>March 2008 – January 2012, TradeLink (3 years 11 months)</p>
+            <p>
+                I worked in the group tasked with algorithmic trading and
+                execution.
+            </p>
+        </div>
+        <div class="overlay" res-page=""
+            res-page-background="images/image-hyatt.jpg">
+            <h1>Software Developer</h1>
+            <p>March 2008 – January 2012, TradeLink (3 years 11 months)</p>
+            <p>
+                Our group was responsible for developing and maintaining the two
+                software platforms used for implementing trading strategies and
+                execution algorithms. We were also responsible in large part for
+                the implementations and to a lesser degree for the analysis of
+                those strategies and algorithms.
+            </p>
+        </div>
+        <div class="overlay" res-page=""
+            res-page-background="images/image-picasso.jpg">
+            <h1>Software Developer</h1>
+            <p>March 2008 – January 2012, TradeLink (3 years 11 months)</p>
+            <p>
+                I was an early adopter and promoter of our newer platform which
+                was a generational improvement over our legacy platform, with
+                performance improvements of 25-100x. I provided measurements and
+                other empirical data to the partners which aided their decision
+                to deprecate our older platform.
+            </p>
+        </div>
+        <div class="overlay" res-page=""
+            res-page-background="images/image-dallas.jpg">
+            <h1>Systems Engineer</h1>
+            <p>June 2006 – March 2008, TeamHPC (1 year 10 months)</p>
+        </div>
+        <div class="overlay" res-page=""
+            res-page-background="images/image-eckhart.jpg">
+            <h1>University of Chicago</h1>
+            <p>2002-2006, MA Mathematics</p>
+        </div>
+        <div class="overlay" res-page=""
+            res-page-background="images/image-arlington.jpg">
+            <h1>University of Texas at Arlington</h1>
+            <p>1998-2002, BS Mathematics</p>
+            <p>President, Pi Mu Epsilon</p>
+        </div>
+    </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
@@ -44,12 +127,21 @@
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
+    <script src="bower_components/jquery/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/sass-bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/directives/resPages.js"></script>
+        <script src="scripts/services/navigation.js"></script>
         <!-- endbuild -->
 </body>
 </html>
