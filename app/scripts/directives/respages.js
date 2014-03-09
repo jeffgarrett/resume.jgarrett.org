@@ -9,6 +9,7 @@ angular.module('resumeApp')
       restrict: 'EA',
       template: '<div ng-transclude=""></div>',
       transclude: true,
+      replace: true,
       scope: {},
       controller: function($scope, $element, $document) {
         var pages = [];
@@ -23,7 +24,7 @@ angular.module('resumeApp')
           $element.css('backgroundImage', 'url(' + pages[i].background + ')');
         };
 
-        $scope.previous = function() {
+        this.previous = $scope.previous = function() {
           $scope.hide(activePageIndex);
           activePageIndex = activePageIndex - 1;
           if (activePageIndex < 0)
@@ -31,7 +32,7 @@ angular.module('resumeApp')
           $scope.show(activePageIndex);
         };
 
-        $scope.next = function() {
+        this.next = $scope.next = function() {
           $scope.hide(activePageIndex);
           activePageIndex = activePageIndex + 1;
           if (activePageIndex >= pages.length)
@@ -110,6 +111,25 @@ angular.module('resumeApp')
         element.hide();
         var bkgd = attrs.resPageBackground;
         pagesCtrl.addPage(element, bkgd);
+      }
+    };
+  });
+
+angular.module('resumeApp')
+  .directive('resPageNav', function () {
+    return {
+      require: '^resPages',
+      restrict: 'EA',
+      template: '<div ng-transclude=""></div>',
+      transclude: true,
+      link: function postLink(scope, element, attrs, pagesCtrl) {
+        element.bind('click', function() {
+            if (attrs.nav == 'next') {
+                pagesCtrl.next();
+            } else {
+                pagesCtrl.previous();
+            }
+        });
       }
     };
   });
