@@ -186,7 +186,7 @@ module.exports = function (grunt) {
           src: [
             '<%= yeoman.dist %>/scripts/{,*/}*.js',
             '<%= yeoman.dist %>/styles/{,*/}*.css',
-            //'<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+            '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
             '<%= yeoman.dist %>/styles/fonts/*'
           ]
         }
@@ -208,7 +208,41 @@ module.exports = function (grunt) {
       html: ['<%= yeoman.dist %>/{,*/}*.html'],
       css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
       options: {
-        assetsDirs: ['<%= yeoman.dist %>']
+        assetsDirs: ['<%= yeoman.dist %>'],
+        patterns: {
+          html: [
+            [/(images\/.*?\.(?:gif|jpeg|jpg|png|webp|svg))/gm, 'Replacing images'],
+            /* todo: the rest of these are standard, don't know how to include */
+            /*jshint regexp:false */
+            [ /<script.+src=['"]([^"']+)["']/gm,
+            'Update the HTML to reference our concat/min/revved script files'
+            ],
+            [ /<link[^\>]+href=['"]([^"']+)["']/gm,
+            'Update the HTML with the new css filenames'
+            ],
+            [ /<img[^\>]+src=['"]([^"']+)["']/gm,
+            'Update the HTML with the new img filenames'
+            ],
+            [ /data-main\s*=['"]([^"']+)['"]/gm,
+            'Update the HTML with data-main tags',
+            function (m) { return m.match(/\.js$/) ? m : m + '.js'; },
+            function (m) { return m.replace('.js', ''); }
+            ],
+            [ /data-(?!main).[^=]+=['"]([^'"]+)['"]/gm,
+            'Update the HTML with data-* tags'
+            ],
+            [ /url\(\s*['"]([^"']+)["']\s*\)/gm,
+            'Update the HTML with background imgs, case there is some inline style'
+            ],
+            [ /<a[^\>]+href=['"]([^"']+)["']/gm,
+            'Update the HTML with anchors images'
+            ],
+            [/<input[^\>]+src=['"]([^"']+)["']/gm,
+            'Update the HTML with reference in input'
+            ]
+          ]
+        }
+
       }
     },
 
@@ -392,6 +426,7 @@ module.exports = function (grunt) {
     'copy:dist',
     'cdnify',
     'cssmin',
+    'imagemin',
     'uglify',
     'rev',
     'usemin',
